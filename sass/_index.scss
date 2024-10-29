@@ -70,7 +70,7 @@ input[type='text'] {
   padding: 4px 4px 4px 1rem;
   display: flex;
 }
-.btn_add {
+#btn_add {
   display: flex;
   line-height: 33px;
   justify-content: center;
@@ -87,7 +87,7 @@ input[type='text'] {
 .card_list {
   padding: 0;
 }
-.tab {
+#tab {
   display: flex;
   text-align: center;
   color: $gray;
@@ -96,6 +96,9 @@ input[type='text'] {
     padding: 1rem;
     width: 100%;
     border-bottom: 2px solid $light;
+    &:hover{
+      cursor: pointer;
+    }
     &.active {
       border-bottom: 2px solid $dark;
       color: $dark;
@@ -109,7 +112,7 @@ input[type='text'] {
     padding: 0.5rem 1rem 0.5rem 0.5rem;
   }
 }
-.list {
+#list {
   li {
     position: relative;
     padding-right: 2rem;
@@ -199,7 +202,7 @@ input[type='text'] {
     content: '';
     position: absolute;
     left: 14px;
-    top: 27%;
+    top: 35%;
     transform: rotate(45deg);
     height: 15px;
     width: 0.5rem;

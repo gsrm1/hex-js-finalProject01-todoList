@@ -1,20 +1,19 @@
 const listData = [
   {
     text: '把冰箱發霉的檸檬拿去丟',
-    id: '',
     checked: '',
   },
 ];
-const list = document.querySelector('.list');
-const todoInput = document.querySelector('.todoInput');
-const btn_add = document.querySelector('.btn_add');
+const list = document.querySelector('#list');
+const todoInput = document.querySelector('#todoInput');
+const addBtn = document.querySelector('#btn_add');
 
 //渲染用函式
 function renderList() {
   let str = '';
   listData.forEach(function (item, index) {
-    str += ` <li><label class="checkbox" data-index="${index}" for="">
-                <input type="checkbox" />
+    str += ` <li><label class="checkbox">
+                <input type="checkbox" ${item.checked}/>
                 <span>${item.text}</span>
               </label>
               <a href="#" class="delete" data-index="${index}"></a></li> `;
@@ -29,7 +28,6 @@ function saveTodo() {
   }
   const newTodo = {
     text: '',
-    id: '',
     checked: '',
   };
   newTodo.text = todoInput.value;
@@ -38,7 +36,7 @@ function saveTodo() {
 }
 
 //送出待辦
-btn_add.addEventListener('click', function (e) {
+addBtn.addEventListener('click', function (e) {
   saveTodo();
   todoInput.value = '';
 });
@@ -50,15 +48,29 @@ todoInput.addEventListener('keypress', function (e) {
   }
 });
 
+//tab切換(css樣式)
+const tabUl = document.querySelector('#tab');
+let toggleStatus = '';
+tabUl.addEventListener('click', changeTab);
+function changeTab(e) {
+  const tabLi = document.querySelectorAll('#tab li');
+  tabLi.forEach(function (item) {
+    item.classList.remove('active');
+  });
+  e.target.classList.add('active');
+  toggleStatus = e.target.getAttribute('data-tab'); 
+}
+
 //刪除功能
 list.addEventListener('click', function (e) {
   if (e.target.getAttribute('class') !== 'delete') {
     return;
   }
-  let indexToDelete = e.target.getAttribute('data-index');
-  let deleteConfirm = confirm('確定放到"已完成"區嗎？');
+  e.preventDefault();
+  const deleteByIndex = e.target.getAttribute('data-index');
+  const deleteConfirm = confirm('確定刪除該事項嗎？');
   if (deleteConfirm) {
-    listData.splice(indexToDelete, 1);
+    listData.splice(deleteByIndex, 1);
   }
   renderList();
 });

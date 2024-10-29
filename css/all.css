@@ -124,7 +124,7 @@ input[type=text]::placeholder {
   display: flex;
 }
 
-.btn_add {
+#btn_add {
   display: flex;
   line-height: 33px;
   justify-content: center;
@@ -142,18 +142,21 @@ input[type=text]::placeholder {
   padding: 0;
 }
 
-.tab {
+#tab {
   display: flex;
   text-align: center;
   color: #9f9a91;
   font-size: 14px;
 }
-.tab li {
+#tab li {
   padding: 1rem;
   width: 100%;
   border-bottom: 2px solid #efefef;
 }
-.tab li.active {
+#tab li:hover {
+  cursor: pointer;
+}
+#tab li.active {
   border-bottom: 2px solid #333;
   color: #333;
   font-weight: bold;
@@ -168,16 +171,16 @@ input[type=text]::placeholder {
   }
 }
 
-.list li {
+#list li {
   position: relative;
   padding-right: 2rem;
 }
 @media (max-width: 575px) {
-  .list li {
+  #list li {
     padding-right: 0;
   }
 }
-.list li a.delete {
+#list li a.delete {
   position: absolute;
   opacity: 0;
   right: 0;
@@ -193,13 +196,13 @@ input[type=text]::placeholder {
   background-size: contain;
 }
 @media (max-width: 575px) {
-  .list li a.delete {
+  #list li a.delete {
     opacity: 1;
     width: 12px;
     height: 12px;
   }
 }
-.list li:hover a.delete {
+#list li:hover a.delete {
   opacity: 1;
 }
 
@@ -267,7 +270,7 @@ input[type=text]::placeholder {
   content: "";
   position: absolute;
   left: 14px;
-  top: 27%;
+  top: 35%;
   transform: rotate(45deg);
   height: 15px;
   width: 0.5rem;

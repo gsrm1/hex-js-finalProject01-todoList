@@ -13,19 +13,19 @@
     <div class="container">
       <h1>TODO LIST</h1>
       <div class="card input">
-        <input class="todoInput" type="text" placeholder="請輸入待辦事項 (按Enter鍵或右方按扭送出)" />
-        <a href="#" class="btn_add">+</a>
+        <input id="todoInput" type="text" placeholder="請輸入待辦事項 (按Enter鍵或右方按扭送出)" />
+        <a href="#" id="btn_add">+</a>
       </div>
       <div class="card card_list">
-        <ul class="tab">
-          <li class="active">全部</li>
-          <li>待完成</li>
-          <li>已完成</li>
+        <ul id="tab">
+          <li class="active" data-tab="all">全部</li>
+          <li data-tab="working">待完成</li>
+          <li data-tab="done">已完成</li>
         </ul>
         <div class="cart_content">
-          <ul class="list">
+          <ul id="list">
             <li>
-              <label class="checkbox" for="">
+              <label class="checkbox">
                 <input type="checkbox" />
                 <span>把冰箱發霉的檸檬拿去丟</span>
               </label>
