@@ -126,7 +126,7 @@ input[type=text]::placeholder {
 
 #btn_add {
   display: flex;
-  line-height: 33px;
+  line-height: 37px;
   justify-content: center;
   flex-shrink: 0;
   width: 40px;
