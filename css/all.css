@@ -80,10 +80,16 @@ h1 {
   letter-spacing: 0.5rem;
   font-weight: bold;
 }
+h1 span {
+  font-size: 1.5rem;
+}
 @media (max-width: 575px) {
   h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin-bottom: 1rem;
+  }
+  h1 span {
+    font-size: 0.8rem;
   }
 }
 
@@ -124,7 +130,7 @@ input[type=text]::placeholder {
   display: flex;
 }
 
-#btn_add {
+#addBTN {
   display: flex;
   line-height: 37px;
   justify-content: center;
@@ -171,16 +177,19 @@ input[type=text]::placeholder {
   }
 }
 
-#list li {
+#todoList li {
   position: relative;
   padding-right: 2rem;
 }
+#todoList li:hover {
+  cursor: pointer;
+}
 @media (max-width: 575px) {
-  #list li {
+  #todoList li {
     padding-right: 0;
   }
 }
-#list li a.delete {
+#todoList li a.delete {
   position: absolute;
   opacity: 0;
   right: 0;
@@ -192,33 +201,33 @@ input[type=text]::placeholder {
   width: 1rem;
   height: 1rem;
   background: #000;
-  background-image: url(https://github.com/gsrm1/hex-js-finalProject01-todoList/blob/main/image/deleteIcon.jpeg);
+  background-image: url(https://i.imgur.com/H4rXTeT.jpg);
   background-size: contain;
 }
 @media (max-width: 575px) {
-  #list li a.delete {
+  #todoList li a.delete {
     opacity: 1;
     width: 12px;
     height: 12px;
   }
 }
-#list li:hover a.delete {
+#todoList li:hover a.delete {
   opacity: 1;
 }
 
-.list_footer {
+.listFooter {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem 2rem 1rem 0.5rem;
   font-size: 14px;
 }
-.list_footer a {
+.listFooter a {
   color: #9f9a91;
   text-decoration: none;
 }
 @media (max-width: 575px) {
-  .list_footer {
+  .listFooter {
     padding: 1.5rem 0 1rem 0.5rem;
   }
 }
@@ -291,4 +300,9 @@ input[type=text]::placeholder {
 }
 .checkbox input:checked ~ span::after {
   opacity: 1;
+}
+
+button {
+  height: 44px;
+  cursor: pointer;
 }/*# sourceMappingURL=all.css.map */

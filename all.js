@@ -1,119 +1,135 @@
-//初始陣列
-let listData = [
-  {
-    text: '學習JavaScript',
-    checked: '',
-  },
-  {
-    text: '繳交TodoList作業',
-    checked: 'checked',
-  },
-  {
-    text: '找到一份前端工程師工作',
-    checked: '',
-  },
-];
-//渲染功能
-const list = document.querySelector('#list');
-function renderList(array) {
-  let str = '';
-  array.forEach(function (item, index) {
-    str += ` <li data-listNumIndex="${index}"><label class="checkbox">
-                <input type="checkbox" name="checkbox" ${item.checked}/>
-                <span>${item.text}</span>
-              </label>
-              <a href="#" class="delete" data-deleteIndex="${index}"></a>
-            </li> `;
-  });
-  list.innerHTML = str;
-  const workingNum = document.querySelector('.list_footer p');
-  let workingItems = listData.filter(function (item) {
-    return item.checked == '';
-  });
-  workingNum.textContent = `${workingItems.length}個待完成項目`;
-}
-renderList(listData);
-//新增清單功能：提醒未輸入、將輸入內容帶入初始陣列
-const todoInput = document.querySelector('#todoInput');
-function saveTodo() {
-  if (todoInput.value == '' || todoInput.value.trim() == '') {
-    return alert('請輸入待辦事項！');
+//一、初始陣列(使用localStorage儲存資料在瀏覽器)
+let todoData = localStorage.getItem('todoData');//從updateList內取資料
+todoData = todoData ? JSON.parse(todoData) : [
+      { text: '學習JavaScript', id: new Date().getTime(), checked: '' },
+      { text: '繳交TodoList作業', id: new Date().getTime() + 1, checked: 'checked' },
+      { text: '找到一份前端工程師工作', id: new Date().getTime() + 2, checked: '', },
+    ];
+
+//二、新增Todo
+const addBtn = document.querySelector('#addBTN');
+const inputText = document.querySelector('#inputText');
+addBtn.addEventListener('click', function (e) {
+  addTodo();
+});
+inputText.addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') {
+    addTodo();
   }
-  const newTodo = {
-    text: '',
+});
+function addTodo() {
+  const todo = {
+    text: inputText.value,
+    id: new Date().getTime(),
     checked: '',
   };
-  newTodo.text = todoInput.value;
-  listData.push(newTodo);
-  todoInput.value = '';
+  if (todo.text === '' || todo.text.trim() === '') {
+    return alert('請輸入待辦事項！');
+  }
+  todoData.unshift(todo);
+  inputText.value = '';
   updateList();
 }
-//新增清單功能：送出方式（按鈕與鍵盤Enter）
-const addBtn = document.querySelector('#btn_add');
-addBtn.addEventListener('click', function (e) {
-  saveTodo();
-});
-todoInput.addEventListener('keypress', function (e) {
-  if (e.key === 'Enter') {
-    saveTodo();
-  }
-});
-//刪除 & 標示待完成
-list.addEventListener('click', function (e) {
-  if (e.target.getAttribute('class') === 'delete') {
+
+//三、渲染
+const todoList = document.querySelector('#todoList');
+function renderList(array) {
+  let str = '';
+  array.forEach(function (item) {
+    str += `<li data-id="${item.id}">
+    <label class="checkbox">
+    <input type="checkbox" name="checkbox" ${item.checked}/>
+    <span>${item.text}</span>
+    </label>
+    <a href="#" class="delete" ></a>
+    </li>`;
+  });
+  todoList.innerHTML = str;
+}
+
+//四、tab切換
+const tab = document.querySelector('#tab');
+const tabLi = document.querySelectorAll('#tab li');
+let toggleStatus = 'all';
+tab.addEventListener('click', changeTab);
+function changeTab(e) {
+  toggleStatus = e.target.dataset.tab;
+  tabLi.forEach(function (item) {
+    item.classList.remove('active');
+  });
+  e.target.classList.add('active');
+  updateList();
+}
+
+//五、刪除個別清單 & 切換checked狀態
+todoList.addEventListener('click', deleteAndChecked);
+function deleteAndChecked(e) {
+  let id = e.target.closest('li').dataset.id;
+  if (e.target.classList.value === 'delete') {
     e.preventDefault();
-    const deleteByIndex = e.target.getAttribute('data-deleteIndex');
-    const deleteConfirm = confirm('確定刪除該事項嗎？');
-    if (deleteConfirm) {
-      listData.splice(deleteByIndex, 1);
-    }
-    updateList();
+    todoData = todoData.filter((item) => item.id != id);
   } else {
-    let listNumIndex = e.target.closest('li').getAttribute('data-listNumIndex');
-    listData.forEach(function (item, index) {
-      if (index == listNumIndex) {
-        //問題：比較子不能使用'==='
-        if (listData[index].checked == 'checked') {
-          listData[index].checked = '';
+    todoData.forEach(function (item, index) {
+      if (item.id == id) {//id為字串需轉型故無法使用嚴格等於
+        if (todoData[index].checked === 'checked') {
+          todoData[index].checked = '';
         } else {
-          listData[index].checked = 'checked';
+          todoData[index].checked = 'checked';
         }
-        updateList();
       }
     });
   }
-});
-//更新功能
-let classifiedData = [];
-function updateList() {
-  if (toggleStatus == '全部') {
-    classifiedData = listData;
-  } else if (toggleStatus == '待完成') {
-    classifiedData = listData.filter((item) => item.checked == '');
-  } else if (toggleStatus == '已完成') {
-    classifiedData = listData.filter((item) => item.checked == 'checked');
-  }
-  renderList(classifiedData);
-}
-//tab切換：切換tab樣式、紀錄選取tab頁簽的狀態
-const tabUl = document.querySelector('#tab');
-let toggleStatus = '全部';
-tabUl.addEventListener('click', function (e) {
-  toggleStatus = e.target.innerText;
-  let tabLi = document.querySelectorAll('#tab li');
-  tabLi.forEach(function (i) {
-    i.classList.remove('active');
-  });
-  e.target.classList.add('active');
-  updateList(); //使用分類完成狀態功能
-});
-//刪除已完成功能
-const clearDoneList = document.querySelector('.list_footer a');
-clearDoneList.addEventListener('click', function (e) {
-  e.preventDefault();
-  const deleteDoneConfirm = confirm('確定清除已完成項目嗎？');
-    if (deleteDoneConfirm) {
-      listData = listData.filter((item) => item.checked == '');
-    }
   updateList();
+}
+
+//六、切換tab後更新清單
+function updateList() {
+  let showData = [];
+  if (toggleStatus === 'all') {
+    showData = todoData;
+  } else if (toggleStatus === 'work') {
+    showData = todoData.filter((item) => item.checked === '');
+  } else {
+    showData = todoData.filter((item) => item.checked === 'checked');
+  }
+  const workNum = document.querySelector('#workNum');
+  let todoLength = todoData.filter((item) => item.checked === '');
+  workNum.textContent = todoLength.length;
+  renderList(showData);
+  localStorage.setItem('todoData', JSON.stringify(todoData));//提交資料到localStorage
+  //stringify方法將JavaScript值轉換成JSON字串(String)
+}
+
+//七、印出初始清單
+updateList();
+
+//八、一鍵清除已完成清單
+const deleteBTN = document.querySelector('#deleteBTN');
+const tabFirstLi = document.querySelector('#tab li');
+deleteBTN.addEventListener('click', function (e) {
+  e.preventDefault();
+  if (confirm('確定清除所有已完成嗎？')) {
+    todoData = todoData.filter((item) => item.checked != 'checked');
+    toggleStatus = 'all';
+    tabLi.forEach(function (item) {
+      item.classList.remove('active');
+    });
+    tabFirstLi.classList.add('active');//一鍵刪除後切換tab到"全部"
+    updateList();
+  }
+});
+
+//九、清除localStorage儲存資料恢復預設清單
+const clearLocalStorageBTN = document.querySelector('#clearLocalStorageBTN');
+clearLocalStorageBTN.addEventListener('click', function (e) {
+  if(confirm('確定清除儲存資料恢復預設內容嗎？')){
+    localStorage.removeItem('todoData');
+    todoData = [
+      { text: '學習JavaScript', id: new Date().getTime(), checked: '' },
+      { text: '繳交TodoList作業', id: new Date().getTime() + 1, checked: 'checked' },
+      { text: '找到一份前端工程師工作', id: new Date().getTime() + 2, checked: '', },
+    ];
+    updateList();
+    alert('已清除儲存資料並恢復預設內容');
+  }
 });

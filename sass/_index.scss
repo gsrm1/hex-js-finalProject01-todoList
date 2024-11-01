@@ -34,9 +34,15 @@ h1 {
   font-family: 'Baloo Tamma 2';
   letter-spacing: 0.5rem;
   font-weight: bold;
+  span{
+    font-size: 1.5rem;
+  }
   @media (max-width: 575px) {
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin-bottom: 1rem;
+    span{
+    font-size: 0.8rem;
+  }
   }
 }
 .container {
@@ -70,7 +76,7 @@ input[type='text'] {
   padding: 4px 4px 4px 1rem;
   display: flex;
 }
-#btn_add {
+#addBTN {
   display: flex;
   line-height: 37px;
   justify-content: center;
@@ -112,10 +118,13 @@ input[type='text'] {
     padding: 0.5rem 1rem 0.5rem 0.5rem;
   }
 }
-#list {
+#todoList {
   li {
     position: relative;
     padding-right: 2rem;
+    &:hover{
+      cursor: pointer;
+    }
     @media (max-width: 575px) {
       padding-right: 0;
     }
@@ -131,7 +140,7 @@ input[type='text'] {
       width: 1rem;
       height: 1rem;
       background: #000;
-      background-image: url(https://github.com/gsrm1/hex-js-finalProject01-todoList/blob/main/image/deleteIcon.jpeg);
+      background-image: url(https://i.imgur.com/H4rXTeT.jpg);
       background-size: contain;
       @media (max-width: 575px) {
         opacity: 1;
@@ -144,7 +153,7 @@ input[type='text'] {
     }
   }
 }
-.list_footer {
+.listFooter {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -226,4 +235,8 @@ input[type='text'] {
       opacity: 1;
     }
   }
+}
+button{
+  height: 44px;
+  cursor: pointer;
 }
