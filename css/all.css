@@ -166,6 +166,7 @@ input[type=text]::placeholder {
   border-bottom: 2px solid #333;
   color: #333;
   font-weight: bold;
+  color: green;
 }
 
 .cart_content {
@@ -191,7 +192,6 @@ input[type=text]::placeholder {
 }
 #todoList li a.delete {
   position: absolute;
-  opacity: 0;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
@@ -210,9 +210,6 @@ input[type=text]::placeholder {
     width: 12px;
     height: 12px;
   }
-}
-#todoList li:hover a.delete {
-  opacity: 1;
 }
 
 .listFooter {
@@ -304,5 +301,6 @@ input[type=text]::placeholder {
 
 button {
   height: 44px;
+  color: red;
   cursor: pointer;
 }/*# sourceMappingURL=all.css.map */

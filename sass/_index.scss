@@ -109,6 +109,7 @@ input[type='text'] {
       border-bottom: 2px solid $dark;
       color: $dark;
       font-weight: bold;
+      color: green;
     }
   }
 }
@@ -130,7 +131,6 @@ input[type='text'] {
     }
     a.delete {
       position: absolute;
-      opacity: 0;
       right: 0;
       top: 50%;
       transform: translateY(-50%);
@@ -147,9 +147,6 @@ input[type='text'] {
         width: 12px;
         height: 12px;
       }
-    }
-    &:hover a.delete {
-      opacity: 1;
     }
   }
 }
@@ -238,5 +235,6 @@ input[type='text'] {
 }
 button{
   height: 44px;
+  color: red;
   cursor: pointer;
 }
