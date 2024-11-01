@@ -7,17 +7,17 @@ todoData = todoData
         id: new Date().getTime(),
         checked: '' },
       {
-        text: '點我試試看：切換清單完成狀態，點右邊X刪除',
+        text: '點我試試：切換完成狀態，點右邊X刪除',
         id: new Date().getTime() + 1,
         checked: 'checked',
       },
       {
-        text: '上方：篩選完成類別、左下：待完成數量及時更新、右下：刪除所有已完成、下面按鈕：清除儲存資料恢復預設',
+        text: '上方：篩選類別、左下：目前待完成數量、右下：刪除所有已完成、下面按鈕：清除資料恢復預設',
         id: new Date().getTime() + 2,
         checked: '',
       },
       {
-        text: '資料管理說明：資料會長期儲存在你的瀏覽器記憶體中(不會外流請放心)，可加到我的最愛網站、甚至拉到桌面當APP使用也OK，重開機你的資料還會在喔！',
+        text: '資料管理說明：資料會長期儲存在你的瀏覽器記憶體(不會外流請放心)，可加我的最愛書籤或做書籤捷徑到桌面當APP使用，重開機你的資料還會在',
         id: new Date().getTime() + 3,
         checked: '',
       },
@@ -142,17 +142,17 @@ clearLocalStorageBTN.addEventListener('click', function (e) {
         id: new Date().getTime(),
         checked: '' },
       {
-        text: '點我試試看：切換清單完成狀態，點右邊X刪除',
+        text: '點我試試：切換完成狀態，點右邊X刪除',
         id: new Date().getTime() + 1,
         checked: 'checked',
       },
       {
-        text: '上方：篩選完成類別、左下：待完成數量及時更新、右下：刪除所有已完成、下面按鈕：清除儲存資料恢復預設',
+        text: '上方：篩選類別、左下：目前待完成數量、右下：刪除所有已完成、下面按鈕：清除資料恢復預設',
         id: new Date().getTime() + 2,
         checked: '',
       },
       {
-        text: '資料管理說明：資料會長期儲存在你的瀏覽器記憶體中(不會外流請放心)，可加到我的最愛網站、甚至拉到桌面當APP使用也OK，重開機你的資料還會在喔！',
+        text: '資料管理說明：資料會長期儲存在你的瀏覽器記憶體(不會外流請放心)，可加我的最愛書籤或做書籤捷徑到桌面當APP使用，重開機你的資料還會在',
         id: new Date().getTime() + 3,
         checked: '',
       },
