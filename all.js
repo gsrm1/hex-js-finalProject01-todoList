@@ -3,15 +3,22 @@ let todoData = localStorage.getItem('todoData'); //從updateList內取資料
 todoData = todoData
   ? JSON.parse(todoData)
   : [
-      { text: '學習JavaScript', id: new Date().getTime(), checked: '' },
+      { text: '>待辦清單使用說明<',
+        id: new Date().getTime(),
+        checked: '' },
       {
-        text: '繳交TodoList作業',
+        text: '點我試試看：切換清單完成狀態，點右邊X刪除',
         id: new Date().getTime() + 1,
         checked: 'checked',
       },
       {
-        text: '找到一份前端工程師工作',
+        text: '上方：篩選完成類別、左下：待完成數量及時更新、右下：刪除所有已完成、下面按鈕：清除儲存資料恢復預設',
         id: new Date().getTime() + 2,
+        checked: '',
+      },
+      {
+        text: '資料管理說明：資料會長期儲存在你的瀏覽器記憶體中(不會外流請放心)，可加到我的最愛網站、甚至拉到桌面當APP使用也OK，重開機你的資料還會在喔！',
+        id: new Date().getTime() + 3,
         checked: '',
       },
     ];
@@ -131,15 +138,22 @@ clearLocalStorageBTN.addEventListener('click', function (e) {
   if (confirm('確定清除儲存資料恢復預設內容嗎？')) {
     localStorage.removeItem('todoData');
     todoData = [
-      { text: '學習JavaScript', id: new Date().getTime(), checked: '' },
+      { text: '>待辦清單使用說明<',
+        id: new Date().getTime(),
+        checked: '' },
       {
-        text: '繳交TodoList作業',
+        text: '點我試試看：切換清單完成狀態，點右邊X刪除',
         id: new Date().getTime() + 1,
         checked: 'checked',
       },
       {
-        text: '找到一份前端工程師工作',
+        text: '上方：篩選完成類別、左下：待完成數量及時更新、右下：刪除所有已完成、下面按鈕：清除儲存資料恢復預設',
         id: new Date().getTime() + 2,
+        checked: '',
+      },
+      {
+        text: '資料管理說明：資料會長期儲存在你的瀏覽器記憶體中(不會外流請放心)，可加到我的最愛網站、甚至拉到桌面當APP使用也OK，重開機你的資料還會在喔！',
+        id: new Date().getTime() + 3,
         checked: '',
       },
     ];
