@@ -39,12 +39,12 @@ function addTodo() {
     id: new Date().getTime(),
     checked: '',
   };
-  if (todo.text === '' || todo.text.trim() === '') {
+  if (todo.text.trim() === '') {
     return alert('請輸入待辦事項！');
   }
   todoData.unshift(todo);
   inputText.value = '';
-  updateList();
+  switchTabToAll();
 }
 //三、渲染
 const todoList = document.querySelector('#todoList');
@@ -80,10 +80,10 @@ function deleteAndChecked(e) {
   let id = e.target.closest('li').dataset.id;
   if (e.target.classList.value === 'delete') {
     e.preventDefault();
-    todoData = todoData.filter((item) => item.id != id);
+    todoData = todoData.filter((item) => item.id != id);//id為字串需轉型使用一般相等比較運算子
   } else {
     todoData.forEach(function (item, index) {
-      if (item.id == id) {//id為字串需轉型故使用一般相等比較運算子
+      if (item.id == id) {//id為字串需轉型使用一般相等比較運算子
         if (todoData[index].checked === 'checked') {
           todoData[index].checked = '';
         } else {
@@ -128,7 +128,7 @@ const tabFirstLi = document.querySelector('#tab li');
 deleteBTN.addEventListener('click', function (e) {
   e.preventDefault();
   if (confirm('確定清除所有已完成嗎？')) {
-    todoData = todoData.filter((item) => item.checked != 'checked');
+    todoData = todoData.filter((item) => item.checked !== 'checked');
     switchTabToAll();
   }
 });
